@@ -10,10 +10,10 @@ class GithubactionstestApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void testFail(){
-		throw new RuntimeException("실패했다");
-
-	}
+//	@Test
+//	void testFail(){
+//		throw new RuntimeException("실패했다");
+//
+//	}
 
 }
