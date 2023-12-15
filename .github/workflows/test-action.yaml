@@ -1,0 +1,27 @@
+name: test action #테스크 관리 시 스크립트에 붙는 이름, 어떻게  작성되어도 무방
+
+on:
+  workflow_dispatch: # 사용자가 실행했을때
+  push: # 푸시가 유발되었을때
+    #branches: master # master 브랜치에 푸시가 유발된 경우
+    branches: ['master', 'develop'] # master, develop 브랜치에 푸시가 유발된 경우
+    # 작성을 안 하면 그냥 모든 브랜치를 타겟으로 잡음.
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin #꼭 기입하지 않아도 됨
+          cache: gradle
+
+#gradle 권한 부여 해줌
+      - name: Grant execute permissionfor gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew test
+
+          # name은 행동에 대한 이름일 뿐이고 run은 셀 스크립트에 치는 명형어, Uses는 깃허브 액션에 사전에 기입된 명령어 사용
